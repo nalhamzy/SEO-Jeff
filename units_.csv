@@ -1,0 +1,226 @@
+,unit
+0,Meter
+1,Metre
+2,Millimeter
+3,mm
+4,Centimeter
+5,cm
+6,Decimeter
+7,dm
+8,Kilometer
+9,km
+10,in 
+11, “
+12,"l., li. "
+13, lnk.
+14,Foot
+15,ft
+16,Yard
+17,yd
+18,Rod
+19,Perch 
+20, Pole
+21,"Lug
+"
+22,Chain
+23,
+24,Furlong
+25,
+26,mi 
+27, m 
+28, ml
+29,Nautical Mile
+30,sm
+31,Astronomical Unit
+32,AE
+33,Light Year
+34,lj
+35,Parsec
+36,pc
+37,sqm 
+38, m2
+39,a 
+40, ares
+41,Acre
+42,acre
+43,Hectare
+44,ha
+45,Square inch
+46,in2
+47,Square feet
+48,ft2
+49,Square yard
+50,yd2
+51,sq mi 
+52, mi2
+53,Cubic meter
+54,m3
+55,Liter
+56,l
+57,Milliliter
+58,ml
+59,Centiliter
+60,cl
+61,Deciliter
+62,dl
+63,Hectoliter
+64,hl
+65,cu in 
+66, in3
+67,cu ft 
+68, ft3
+69,cu yd 
+70, yd3
+71,Acre-Foot
+72,acre ft
+73,Teaspoon
+74,tsp
+75,Tablespoon
+76,tbsp
+77,fl oz 
+78, oz. fl
+79,Cup
+80,cup
+81,Gill
+82,gill
+83,pt 
+84, p
+85,Quart
+86,qt
+87,Gallon
+88,gal
+89,rad 
+90, c
+91,° 
+92, deg
+93,Steradian
+94,sr
+95,Second
+96,s
+97,Minute
+98,min
+99,Hour
+100,h
+101,Day
+102,d
+103,Year
+104,a
+105,Hertz
+106,Hz
+107,Angular Frequency
+108,ω
+109,Decibel
+110,dB
+111,Kilogram meters per second
+112,kg m/s
+113,Miles per hour
+114,mph
+115,m/s 
+116, kph
+117,"Gravity Imperial
+"
+118,ft/s2
+119,Gravity Metric
+120,m/s2
+121,Feet per second
+122,ft/s
+123,Grams
+124,g
+125,"Kilogram
+"
+126,kg
+127,Grain
+128,gr
+129,Dram
+130,dr
+131,Ounce
+132,oz
+133,Pound
+134,lb
+135,Hundredweight
+136,cwt
+137,Ton
+138,ton
+139,"Tonne
+"
+140,t
+141,Slug
+142,slug
+143,Density
+144,kg/m3
+145,den 
+146, D
+147,Tex
+148,tex
+149,Decitex
+150,dtex
+151,Mommes
+152,mm
+153,Newton
+154,N
+155,Kilopond
+156,kp
+157,Pond
+158,p
+159,Newton meter
+160,
+161,Joule
+162,J
+163,Watt
+164,w
+165,Kilowatt
+166,kw
+167,Horsepower
+168,hp
+169,Pascal
+170,Pa
+171,Bar
+172,bar
+173,psi 
+174, lbf/in2
+175,Kelvin
+176,K
+177,Centigrade
+178,°C
+179,Cal 
+180, kcal / cal
+181,Fahrenheit
+182,°F
+183,Candela
+184,cd
+185,Candela per square metre
+186,cd/m2
+187,Lumen
+188,lm
+189,Lux
+190,lx
+191,Lumen Seconds
+192,ls
+193,Diopter
+194,dpt
+195,Ampere
+196,A / Amps
+197,Coulomb
+198,C
+199,Volt
+200,V
+201,Ohm
+202,Ω
+203,Farad
+204,F
+205,Siemens
+206,S
+207,Henry
+208,H
+209,Weber
+210,Wb
+211,Tesla
+212,(T)
+213,Becquerel
+214,Bq
+215,Mole
+216,mol
+217,Paper Bale
+218,ream
+219,dz 
+220, doz
