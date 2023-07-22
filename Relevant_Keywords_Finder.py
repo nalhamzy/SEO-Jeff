@@ -3,9 +3,9 @@ from serpapi import GoogleSearch
 
 import pandas as pd
 from requests import get
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
+# import nltk
+# nltk.download('punkt')
+# nltk.download('stopwords')
 from pprint import pprint
 from requests import session
 import textrazor
@@ -17,9 +17,8 @@ import pandas as pd
 import numpy as np
 from requests import get
 import re 
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
+# nltk.download('punkt')
+# nltk.download('stopwords')
 from pprint import pprint
 from requests import session
 import textrazor
@@ -33,18 +32,18 @@ client.set_cleanup_mode(cleanup_mode='cleanHTML')
 client.set_cleanup_return_cleaned(True)
 
 
-from nltk.corpus import stopwords
-import spacy
-import voice_type 
-import keyword_summarizer as ks
-import nlu as nlu
-import unit_extractor as ue
-nlp = spacy.load("en_core_web_sm")
-from nltk.tokenize import sent_tokenize
+# from nltk.corpus import stopwords
+# import spacy
+# import voice_type 
+# import keyword_summarizer as ks
+# import nlu as nlu
+# import unit_extractor as ue
+# nlp = spacy.load("en_core_web_sm")
+# from nltk.tokenize import sent_tokenize
 
 
 
-s_words = set(stopwords.words('english'))
+# s_words = set(stopwords.words('english'))
 def search_keywords(input_text,num_pages):
     entity_df = pd.DataFrame(columns=['url','entity','entity_type','text','relevanceScore'])
     filter = "inurl:blog|com --intitle:test"

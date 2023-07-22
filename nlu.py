@@ -3,13 +3,13 @@ from serpapi import GoogleSearch
 import os
 import csv
 import time
-import pandas as pd
-import numpy as np
-from requests import get
+# import pandas as pd
+# import numpy as np
+# from requests import get
 import re 
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
+# import nltk
+# nltk.download('punkt')
+# nltk.download('stopwords')
 from pprint import pprint
 from requests import session
 import textrazor
