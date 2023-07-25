@@ -27,9 +27,9 @@ import numpy as np
 google_app_secret = 'e478f284e8aa736bc21fd8691ae7d08f14680d2e6a1fac7a8d6ad1f51e1b358f'
 textrazor.api_key = "cbf491222196a84d4bbcf85f575a75ea323c329bb97a2bb280404dac"
 
-client = textrazor.TextRazor(extractors=["entities", "words"])
-client.set_cleanup_mode(cleanup_mode='cleanHTML')
-client.set_cleanup_return_cleaned(True)
+client = textrazor.TextRazor(extractors=["words","phrases","entities"])
+# client.set_cleanup_mode(cleanup_mode='cleanHTML')
+# client.set_cleanup_return_cleaned(True)
 
 
 # from nltk.corpus import stopwords
@@ -44,13 +44,13 @@ client.set_cleanup_return_cleaned(True)
 
 
 # s_words = set(stopwords.words('english'))
-def search_keywords(input_text,num_pages):
+def search_keywords(input_text,num_pages=100):
     entity_df = pd.DataFrame(columns=['url','entity','entity_type','text','relevanceScore'])
-    filter = "inurl:blog|com --intitle:test"
+    filter = "inurl:edu|gov --intitle:page"
 
     gsearch = GoogleSearch({
         "q": input_text + ' ' + filter, 
-        "location": "Austin,TX,Texas,United States",
+        "location": "United States",
         "num" : num_pages,
         "api_key": google_app_secret
     })
@@ -66,18 +66,18 @@ def search_keywords(input_text,num_pages):
         page_url = item['link']
         title=item['title']
         try:
-            response = client.analyze_url(item['link'])
-            full_df.loc[len(full_df)] = {'link': page_url,'title':title, 'text':response.cleaned_text }
+            print("Analyze: " + item['title'])
+            response = client.analyze(item['title'])
+            full_df.loc[len(full_df)] = {'link': page_url,'title':title, 'text':title }
             response_obj = response.json
             for entity in response.entities():
-                
                 if len(entity.freebase_types) > 0:
                     ## check if entity doesnt exist in entity_df
                     # if entity_df[entity_df['entity'] == str(entity.id).lower()   ].empty: 
-
+                    print('found')
                     entity_df.loc[len(entity_df)] = {'url': page_url,'title':title, 
                     'entity': str(entity.id).lower(), 'entity_type':str(entity.freebase_types[0]), 
-                    'text':response.cleaned_text, 'relevanceScore':entity.json['relevanceScore'] }
+                    'text':title, 'relevanceScore':entity.json['relevanceScore'] }
 
             
             if 'response' in response_obj and 'sentences' in response_obj['response']:
@@ -94,10 +94,11 @@ def search_keywords(input_text,num_pages):
 
 def main():
     # threshold = st.slider('Score threshold (avg_weight * number_of_doc^2):',0.0, 1.0,0.2,0.05)
-    no_pages = st.selectbox(
-    'Number of pages:',
-    ('10', '20', '30','40','50','60','70','80','90','100','110','120','140','150'))
-    user_input = st.text_input('Google Search', 'unlock iphone')
+    # no_pages = st.selectbox(
+    # 'Number of pages:',
+    # ('10', '20', '30','40','50','60','70','80','90','100','110','120','140','150'))
+    no_pages = 100
+    user_input = st.text_input('Keywords', 'unlock iphone')
 
     if  st.button("Search",no_pages) and len(user_input) > 3 :
         entity_df,words_pos, full_df =  search_keywords(user_input,no_pages)
