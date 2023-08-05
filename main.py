@@ -46,10 +46,10 @@ client = textrazor.TextRazor(extractors=["words","phrases","entities"])
 # s_words = set(stopwords.words('english'))
 def search_keywords(input_text,num_pages=100):
     entity_df = pd.DataFrame(columns=['url','entity','entity_type','text','relevanceScore'])
-    filter = "inurl:edu|gov --intitle:page"
+    filter = "inurl:edu|:gov --intitle:page"
 
     gsearch = GoogleSearch({
-        "q": input_text + ' ' + filter, 
+        "q": "'" + input_text + "'" + ' ' + filter, 
         "location": "United States",
         "num" : num_pages,
         "api_key": google_app_secret
@@ -104,8 +104,10 @@ def main():
         entity_df,words_pos, full_df =  search_keywords(user_input,no_pages)
         new_df = entity_df.groupby('entity').agg({ 'url': pd.Series.nunique,'relevanceScore': pd.Series.mean}).reset_index()
         ## sort by relevance score
-        new_df = new_df.sort_values(by=['relevanceScore'], ascending=False)
+        new_df = new_df.sort_values(by=['url'], ascending=False)
         st.dataframe(new_df.head(20))
+        st.dataframe(full_df.head(20))
+
         # keywords_summary_df = ks.get_keywords_summary(entity_df, threshold, words_pos)
         # st.title('Kewords extraction using TF-IDF')
         new_df = new_df.to_csv().encode('utf-8')  
