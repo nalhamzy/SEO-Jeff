@@ -47,7 +47,7 @@ client = textrazor.TextRazor(extractors=["words","phrases","entities"])
 def search_keywords(input_text,num_pages=100):
     entity_df = pd.DataFrame(columns=['url','entity','entity_type','text','relevanceScore'])
     filter = "inurl:edu OR inurl:gov --intitle:page"
-
+    print( "'" + input_text + "'" + ' ' + filter)
     gsearch = GoogleSearch({
         "q": "'" + input_text + "'" + ' ' + filter, 
         "location": "United States",
@@ -98,7 +98,7 @@ def main():
     # 'Number of pages:',
     # ('10', '20', '30','40','50','60','70','80','90','100','110','120','140','150'))
     no_pages = 100
-    user_input = st.text_input('Keywords', 'unlock iphone')
+    user_input = st.text_input('Keyword', 'unlock iphone')
 
     if  st.button("Search",no_pages) and len(user_input) > 3 :
         entity_df,words_pos, full_df =  search_keywords(user_input,no_pages)
