@@ -63,9 +63,10 @@ def search_keywords(input_text,num_pages=100):
     words_pos = {}
     print('lenght of results', len(result['organic_results']))
     for item in result['organic_results']:
-        page_url = item['link']
-        title=item['title']
         try:
+            page_url = item['link']
+            title=item['title']
+
             print("Analyze: " + item['title'])
 
             response = client.analyze(item['title'])
@@ -88,7 +89,6 @@ def search_keywords(input_text,num_pages=100):
     
                 
         except Exception as ex:
-            continue
             print('exception caught in search_keywords', ex)
     entity_df = entity_df.drop_duplicates(subset=['entity', 'url'])
     return entity_df, words_pos, full_df
