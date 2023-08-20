@@ -70,6 +70,7 @@ def search_keywords(input_text,num_pages=100):
             print("Analyze: " + item['title'])
 
             response = client.analyze(item['title'])
+        
             full_df.loc[len(full_df)] = {'link': page_url,'title':title, 'text':title }
             response_obj = response.json
             for entity in response.entities():
@@ -88,8 +89,9 @@ def search_keywords(input_text,num_pages=100):
                         words_pos[word['token']] = word['partOfSpeech']
     
                 
-        except Exception as ex:
-            print('exception caught in search_keywords', ex)
+        except:
+            print('exception caught in search_keywords')
+            pass
     entity_df = entity_df.drop_duplicates(subset=['entity', 'url'])
     return entity_df, words_pos, full_df
 
