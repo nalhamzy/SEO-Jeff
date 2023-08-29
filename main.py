@@ -45,8 +45,8 @@ client = textrazor.TextRazor(extractors=["words","phrases","entities"])
 
 # s_words = set(stopwords.words('english'))
 def search_keywords(input_text,num_pages=100):
-    entity_df = pd.DataFrame(columns=['url','entity','entity_type','text','relevanceScore'])
-    filter = "inurl:,edu OR inurl:.gov -intitle:page -inurl:page"
+    entity_df = pd.DataFrame(columns=['url','entity','entity_type','text','matched_text','relevanceScore'])
+    filter = "inurl:.edu OR inurl:.gov -intitle:page -inurl:page"
     print( "'" + input_text + "'" + ' ' + filter)
     gsearch = GoogleSearch({
         "q": '"' + input_text + '"' + ' ' + filter,
@@ -58,7 +58,7 @@ def search_keywords(input_text,num_pages=100):
 
     final_results= []
 
-    full_df = pd.DataFrame(columns=['link','title','text'])
+    full_df = pd.DataFrame(columns=['link','title','text','status'])
     count = 0
     words_pos = {}
     print('lenght of results', len(result['organic_results']))
@@ -71,7 +71,7 @@ def search_keywords(input_text,num_pages=100):
 
             response = client.analyze(item['title'])
         
-            full_df.loc[len(full_df)] = {'link': page_url,'title':title, 'text':title }
+            full_df.loc[len(full_df)] = {'link': page_url,'title':title, 'text':title, 'status':"success"}
             response_obj = response.json
             for entity in response.entities():
                 if len(entity.freebase_types) > 0:
@@ -80,7 +80,7 @@ def search_keywords(input_text,num_pages=100):
                     print('found')
                     entity_df.loc[len(entity_df)] = {'url': page_url,'title':title, 
                     'entity': str(entity.id).lower(), 'entity_type':str(entity.freebase_types[0]), 
-                    'text':title, 'relevanceScore':entity.json['relevanceScore'] }
+                    'text':title, 'relevanceScore':entity.json['relevanceScore'],'matched_text': entity.matched_text }
 
             
             if 'response' in response_obj and 'sentences' in response_obj['response']:
@@ -90,6 +90,7 @@ def search_keywords(input_text,num_pages=100):
     
                 
         except:
+            full_df.loc[len(full_df)] = {'link': page_url,'title':'exception caught in search_keywords', 'text':'exception caught in search_keywords', 'status':"error" }
             print('exception caught in search_keywords')
             pass
     entity_df = entity_df.drop_duplicates(subset=['entity', 'url'])
@@ -106,11 +107,11 @@ def main():
 
     if  st.button("Search",no_pages) and len(user_input) > 3 :
         entity_df,words_pos, full_df =  search_keywords(user_input,no_pages)
-        new_df = entity_df.groupby('entity').agg({ 'url': pd.Series.nunique,'relevanceScore': pd.Series.mean}).reset_index()
+        new_df = entity_df.groupby('matched_text').agg({ 'url': pd.Series.nunique,'relevanceScore': pd.Series.mean}).reset_index()
         ## sort by relevance score
         new_df = new_df.sort_values(by=['url'], ascending=False)
-        st.dataframe(new_df.head(20))
-        st.dataframe(full_df.head(20))
+        st.dataframe(new_df)
+        st.dataframe(full_df)
 
         # keywords_summary_df = ks.get_keywords_summary(entity_df, threshold, words_pos)
         # st.title('Kewords extraction using TF-IDF')
