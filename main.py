@@ -81,7 +81,7 @@ def search_keywords(input_text,num_pages=100):
                     # if entity_df[entity_df['entity'] == str(entity.id).lower()   ].empty: 
                     print('found')
                     entity_df.loc[len(entity_df)] = {'url': page_url,'title':title, 
-                    'entity': str(entity.id).lower(), 'entity_type':str(entity.freebase_types[0]), 
+                    'entity': str(entity.matched_text).lower(), 'entity_type':str(entity.freebase_types[0]), 
                     'text':title, 'relevanceScore':entity.json['relevanceScore'],'matched_text': entity.matched_text }
 
             
