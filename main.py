@@ -52,7 +52,9 @@ def search_keywords(input_text,num_pages=100):
         "q": '"' + input_text + '"' + ' ' + filter,
         "location": "United States",
         "num" : num_pages,
-        "api_key": google_app_secret
+        "api_key": google_app_secret, 
+        "hl":"en",
+        "gl":"us"
     })
     result = gsearch.get_dict()
 
@@ -69,7 +71,7 @@ def search_keywords(input_text,num_pages=100):
 
             print("Analyze: " + item['title'])
 
-            response = client.analyze(item['title'])
+            response = client.analyze(item['title'].lower())
         
             full_df.loc[len(full_df)] = {'link': page_url,'title':title, 'text':title, 'status':"success"}
             response_obj = response.json
